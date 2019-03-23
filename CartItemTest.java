@@ -1,8 +1,7 @@
-import exceptions.InvalidCountException;
-import org.junit.FixMethodOrder;
+import csc4700.CartItem;
+import csc4700.Item;
+import csc4700.exceptions.InvalidCountException;
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
-
 import static org.junit.Assert.*;
 
 public class CartItemTest {
@@ -17,6 +16,15 @@ public class CartItemTest {
         assertTrue(c1.getItem().getName().equals(i.getName()));
     }
 
+
+    @Test
+    public void testConstructorNull(){
+        CartItem c1 = new CartItem(null);
+
+        assertEquals(0, c1.getCount());
+        assertNull(c1.getItem());
+    }
+
     @Test
     public void testIncrementCountByOne(){
         Item i = new Item();
@@ -26,7 +34,7 @@ public class CartItemTest {
         assertEquals(1, c1.getCount());
     }
 
-    @Test //count cannot go below 0, how to test if non deterministic test order
+    @Test
     public void testDecrementCountByOne(){
         Item i = new Item();
         CartItem c1 = new CartItem(i);
@@ -44,15 +52,17 @@ public class CartItemTest {
 
     @Test
     public void testEquals() {
+        Item i1 = new Item();
+        i1.setName("apple");
+        i1.setCost(1);
+        i1.setDescription("ew");
+        CartItem c1 = new CartItem(i1);
+
         Item i2 = new Item();
-
         i2.setName("apple");
-        i2.setCost(1);
-        i2.setDescription("ew");
-
-        CartItem c1 = new CartItem(i2);
+        i2.setCost(2);
+        i2.setDescription("yum");
         CartItem c2 = new CartItem(i2);
-
 
         assertTrue(c1.equals(c2));
     }
@@ -60,12 +70,8 @@ public class CartItemTest {
     @Test
     public void testNotEqualsNull() {
         Item i1 = new Item();
-        i1.setName("apple");
-
-        Item i2 = null;
-
         CartItem c1 = new CartItem(i1);
-        CartItem c2 = new CartItem(i2);
+        CartItem c2 = null;
 
         assertFalse(c1.equals(c2));
     }
@@ -73,30 +79,26 @@ public class CartItemTest {
     @Test
     public void testNotEqualsDiffClass() {
         Item i1 = new Item();
-        i1.setName("apple");
-
-        int i = 10;
-
         CartItem c1 = new CartItem(i1);
+        String t = "test";
 
-        assertFalse(c1.equals(i));
+        assertFalse(c1.equals(t));
     }
 
     @Test
     public void testHashCode(){
         Item i = new Item();
-        i.setName("name");
+        i.setName("apple");
+        CartItem c1 = new CartItem(i);
 
-    }
-
-    @Test
-    public void testHashCodeNull(){
-
+        assertEquals(c1.hashCode(), i.hashCode());
     }
 
     @Test
     public void testHashCodeNoItem(){
+        CartItem c1 = new CartItem(null);
 
+        assertEquals(c1.hashCode(), 0);
     }
 
     @Test
@@ -153,7 +155,7 @@ public class CartItemTest {
         i.setName("apple");
 
         CartItem c1 = new CartItem(i);
-        try{
+        try {
             c1.setCount(0);
         }
         catch (Exception e){
