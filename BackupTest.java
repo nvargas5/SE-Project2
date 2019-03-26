@@ -19,7 +19,7 @@ public class BackupTest {
 
     @Test
     public void testSerializeShoppingCart(){
-        Item i1 = new Item();
+      Item i1 = new Item();
         Item i2 = new Item();
 
         i1.setName("apple");
@@ -39,7 +39,25 @@ public class BackupTest {
 
         b.serializeShoppingCart(sc);
 
-        String str1 = "apple,1,yum,";
+        StringBuffer itemLineTest = new StringBuffer();
+
+        itemLineTest.append(i1.getName());
+        itemLineTest.append(",");
+        itemLineTest.append(i1.getCost());
+        itemLineTest.append(",");
+        itemLineTest.append(i1.getDescription());
+        itemLineTest.append(",");
+        itemLineTest.append(sc.findCartItem(i1).getCount());
+        itemLineTest.append(System.getProperty("line.separator"));
+
+        itemLineTest.append(i2.getName());
+        itemLineTest.append(",");
+        itemLineTest.append(i2.getCost());
+        itemLineTest.append(",");
+        itemLineTest.append(i2.getDescription());
+        itemLineTest.append(",");
+        itemLineTest.append(sc.findCartItem(i2).getCount());
+        itemLineTest.append(System.getProperty("line.separator"));
 
 
     }
