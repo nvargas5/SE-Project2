@@ -17,6 +17,7 @@ public class ShoppingCartTest {
 
         try {
             sc.addItem(i);
+            fail();
         }
         catch(Exception e){
             assertTrue(e instanceof NullPointerException);
@@ -57,6 +58,7 @@ public class ShoppingCartTest {
 
         try{
             sc.deleteItem(i);
+            fail();
         }
         catch(Exception e){
             assertTrue(e instanceof NullPointerException);

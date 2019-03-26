@@ -12,7 +12,8 @@ public class BackupTest {
         ShoppingCart sc = null;
         Backup b = new Backup();
         try {
-            assertEquals("null", b.serializeShoppingCart(sc));
+            b.serializeShoppingCart(sc);
+            fail();
         } catch (Exception e) {
             assertTrue(e instanceof NullPointerException);
         }

@@ -157,8 +157,8 @@ public class CartItemTest {
         CartItem c1 = new CartItem(i);
         try {
             c1.setCount(0);
-        }
-        catch (Exception e){
+            fail();
+        } catch (Exception e){
             assertTrue(e instanceof InvalidCountException);
         }
     }

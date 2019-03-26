@@ -1,11 +1,13 @@
-import static org.junit.Assert.*;
+import csc4700.Item;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
+
 public class ItemTest {
 
     @Test
     public void testEqualsSameObj() {
         Item i = new Item();
-        i.setName("apple");
         assertTrue(i.equals(i));
     }
 
@@ -70,7 +72,8 @@ public class ItemTest {
     public void testHashCodeNoName() {
         Item i = new Item();
         try {
-            assertEquals(i.hashCode(), i.getName().hashCode());
+            i.hashCode();
+            fail();
         } catch (Exception e) {
             assertTrue(e instanceof NullPointerException);
         }
